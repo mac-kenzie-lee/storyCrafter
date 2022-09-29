@@ -1,8 +1,7 @@
-//populate local storage
+//populate local storage, update if you add more forms!!
 if (localStorage.length !== 0){
-    const listOfULIDs = ['wins']
+    const listOfULIDs = ['wins'] //update if you add more forms
     for (let ids of listOfULIDs) {
-        console.log(Object.keys(localStorage))
         for (let obj of Object.keys(localStorage))
         {
             let key = obj;
@@ -10,11 +9,7 @@ if (localStorage.length !== 0){
             let parentUL = ids + "Ul"
             let parent = document.querySelector(`#${parentUL}`)
             createElementAndAddToDOM('li', parent, value)
-
-            
-
         }
-
         }
     }
 
@@ -33,7 +28,9 @@ function addToTheList(e) {
 e.preventDefault();
 
 //finds the ul associated, so long as it's the next sibling and a valid ul
-if (e.target.nextElementSibling.tagName === "UL" && (e.target[0].value !== "Add another win" && e.target[0].value !== "What's the wins?")) {
+let itemInLocalStorage = notAlreadyInLocalStorage(e.target[0].value);
+
+if (e.target.nextElementSibling.tagName === "UL" && (e.target[0].value !== "Add another win" && e.target[0].value !== "What's the wins?" && e.target[0].value !== "") && itemInLocalStorage) {
     const ul = e.target.nextElementSibling;    
     let valueToAdd = e.target[0].value;
     let parentSectionId = e.target.parentElement.id;
@@ -55,14 +52,46 @@ function clearFormValue(e) {
 //creates an element, adds text and appends to dom
 function createElementAndAddToDOM(elementType, parentContainer, text) {
     let newElement = document.createElement(elementType);
+    newElement.classList.add('liItems')
     newElement.textContent = text;
     parentContainer.appendChild(newElement);
+    addADeleteButton(newElement)
+}
+
+function addADeleteButton(parent) {
+    let deleteButton = document.createElement('button');
+    deleteButton.textContent= 'x'
+    deleteButton.classList.add('deleteButton')
+    parent.appendChild(deleteButton)
+    deleteButton.addEventListener('click', removeFromLocalStorage);
+}
+
+
+function removeFromLocalStorage(e){
+    let textCont = e.target.parentElement.childNodes[0].textContent;
+    //gets the text from the li item
+for (const [key, value] of Object.entries(localStorage)) {
+    //finds the matching item in local storage
+ 
+    if (value === textCont) {
+        let k = key;
+ localStorage.removeItem(key)
+        
+removeItemFromDom(e.target.parentElement)
+     }
+
+    }
+}
+//localStorage.getItem()
+
+function removeItemFromDom(item) {
+    item.remove();
 }
 
 function addValueToLocalStorage(value, parentSectionId) {
     let idMarker = 0;
+
     let IdDoesNotExist = checkIfIdExists(idMarker, parentSectionId, value)
-    console.log(IdDoesNotExist)
     while (IdDoesNotExist === false) {
         idMarker++
         IdDoesNotExist = checkIfIdExists(idMarker, parentSectionId, value)
@@ -76,8 +105,9 @@ function addValueToLocalStorage(value, parentSectionId) {
         if (!localStorage.getItem(parentSectionId+String(idMarker))) {
         //check if id noes not exists
         //set the item
+        //adds to local storage
         localStorage.setItem(parentSectionId+String(idMarker), value)
-        console.log('item added')
+        
 
         return true;
 
@@ -85,12 +115,13 @@ function addValueToLocalStorage(value, parentSectionId) {
         }
     }
 
-    //else {
-      //      idMarker++
-       //     console.log(idMarker)
-        //}
-           
-            //console.log('pupcpy')
-        
- //   localStorage.setItem(value)
+}
+
+//checks local storage to see if the thing was added already or not
+function notAlreadyInLocalStorage(text) {
+ for (let t of Object.values(localStorage)) {
+    if (text === t) {
+        return false;
+    }
+ }   return true;
 }
