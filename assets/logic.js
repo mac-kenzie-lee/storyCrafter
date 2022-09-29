@@ -1,14 +1,19 @@
 //populate local storage, update if you add more forms!!
 if (localStorage.length !== 0){
-    const listOfULIDs = ['wins'] //update if you add more forms
+    const listOfULIDs = ['wins', 'tech'] //update if you add more
     for (let ids of listOfULIDs) {
-        for (let obj of Object.keys(localStorage))
-        {
+        for (let obj of Object.keys(localStorage)){
             let key = obj;
             let value = localStorage.getItem(obj)
             let parentUL = ids + "Ul"
             let parent = document.querySelector(`#${parentUL}`)
-            createElementAndAddToDOM('li', parent, value)
+            let c = parent.id[0] + parent.id[1] + parent.id[2] + parent.id[3]
+      
+            let k = key.slice(0, 4)
+
+            if (k === c) {
+                createElementAndAddToDOM('li', parent, value)
+            }
         }
         }
     }
@@ -17,10 +22,15 @@ if (localStorage.length !== 0){
 const winsForm = document.querySelector("#winsForm");
 const winsInput = document.querySelector("#winsInput")
 
+const techForm = document.querySelector("#techForm");
+const techInput = document.querySelector("#techInput")
+
 //clears the input value area on click
 winsInput.addEventListener('click', clearFormValue)
+techInput.addEventListener('click', clearFormValue)
 //adds items to list on submit.
 winsForm.addEventListener('submit', addToTheList)
+techForm.addEventListener('submit', addToTheList)
 
 
 function addToTheList(e) {
@@ -29,18 +39,40 @@ e.preventDefault();
 
 //finds the ul associated, so long as it's the next sibling and a valid ul
 let itemInLocalStorage = notAlreadyInLocalStorage(e.target[0].value);
-
-if (e.target.nextElementSibling.tagName === "UL" && (e.target[0].value !== "Add another win" && e.target[0].value !== "What's the wins?" && e.target[0].value !== "") && itemInLocalStorage) {
+let invalidEntries = [
+    e.target[0].value !== "Add another win",
+    e.target[0].value !== "What's the wins?",
+    e.target[0].value !== "What was the tech?",
+    e.target[0].value !== "Add more tech",
+    e.target[0].value !== "",
+    itemInLocalStorage
+]
+let check = true;
+for (let x of invalidEntries) {
+    if (x === false)
+    {
+        check = false;
+    }
+}
+if(check === true) {
     const ul = e.target.nextElementSibling;    
     let valueToAdd = e.target[0].value;
     let parentSectionId = e.target.parentElement.id;
      addValueToLocalStorage(valueToAdd, parentSectionId)
     createElementAndAddToDOM('li', ul, valueToAdd)
-} 
-    e.target[0].value = "Add another win"
 
+    switch (parentSectionId) {
+        case "wins":
+            e.target[0].value = "Add another win"
+            break;
+        case "tech":
+            e.target[0].value = "Add more tech"
+            break;
+        default:
+            break;
+    }
+}
 
-//document.getElementById("item1").nextSibling.innerHTML;
 }
 
 //clears text in a form
