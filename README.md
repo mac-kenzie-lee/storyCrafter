@@ -6,7 +6,8 @@ Story Crafter helps identify correlations in your professional careers that migh
 <p align="center">
 <img src="https://github.com/mac-kenzie-lee/storyCrafter/blob/main/storyCrafterGif2.gif?raw=true" alt="Screenshot gif for story crafter"></p>
 <br>
- **Link to project:** https://story-crafter.mackenziedev.com/
+
+**Link to project:** https://story-crafter.mackenziedev.com/
 
 
 
