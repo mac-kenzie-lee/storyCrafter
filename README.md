@@ -1,5 +1,5 @@
 # Story Crafter
-Story Crafter helps indentify correlations in your professional careers that might have been overlooked. Currently it allows users to write down their 'wins' or successes in their professional career, as well as list software/technology or tools that may have been used in the past. The aim of Story Crafter is to help you remember what you've learned and accommplished throughout your experiences.
+Story Crafter helps identify correlations in your professional careers that might have been overlooked. Currently it allows users to write down their 'wins' or successes in their professional career, as well as list software/technology or tools that may have been used in the past. The aim of Story Crafter is to help you remember what you've learned and accommplished throughout your experiences.
 
 
 **Link to project:** https://story-crafter.mackenziedev.com/
