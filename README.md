@@ -4,7 +4,7 @@ Story Crafter helps indentify correlations in your professional careers that mig
 
 **Link to project:** https://story-crafter.mackenziedev.com/
 
-![alt tag](http://placecorgi.com/1200/650)
+
 
 ## How It's Made:
 
