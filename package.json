@@ -1,0 +1,26 @@
+{
+  "name": "storycrafter",
+  "version": "1.0.0",
+  "description": "A place to develop your personal story and focus on the wins you've made in your career",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mac-kenzie-lee/storyCrafter.git"
+  },
+  "keywords": [
+    "Personal",
+    "development",
+    "career",
+    "building",
+    "planning"
+  ],
+  "author": "Mackenzie Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mac-kenzie-lee/storyCrafter/issues"
+  },
+  "homepage": "https://github.com/mac-kenzie-lee/storyCrafter#readme"
+}
